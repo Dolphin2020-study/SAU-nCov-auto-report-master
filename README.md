@@ -28,6 +28,19 @@ TZ=Asia/Shanghai
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ```
 
+# serverless 
+如果你没有服务器，但是仍然想使用本程序，可以使用 serverless function，这里以腾讯云云函数为例。
+1. 登录注册腾讯云
+2. 打开`https://console.cloud.tencent.com/scf/`控制台的云函数页面，任选地区，点击`新建`
+3. 输入函数名称`covid`，运行环境python3.6，创建方式空白函数
+4. 全选然后删除下面cloud studio中正在编辑的`index.py`的文件的全部内容，然后将本项目中`serverless.py`的内容粘贴进去，同时修改自己的sep信息，如果有server酱api的可以填key没有的可以不写
+5. 点击完成
+6. 点击触发方式，选择添加触发方式，输入定时任务名称daily，触发周期为自定义触发周期， cron表达式 `0 30 8 * * * *`，点击完成
+
+
+使用腾讯云的云函数打卡的计算量和调用量极低，不会收费。
+
+
 # 跋
 
 只接受PR，不接受需求。
