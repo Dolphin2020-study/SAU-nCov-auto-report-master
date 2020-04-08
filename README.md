@@ -40,6 +40,15 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 使用腾讯云的云函数打卡的计算量和调用量极低，不会收费。
 
+# 使用 GitHub Actions
+如果你不喜欢腾讯云, 就可以使用 GitHub Action 来进行运行, 使用步骤:
+- 克隆这个仓库到你名下
+- 在仓库设置里面, 设置 secrets 如下
+  - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
+  - `SEP_PASSWD`: 你的 SEP 密码
+  - `API_KEY`: 你的通知 api key (强烈建议设置, 因为不设置这个 api key 你无法及时知晓运行状态)
+
+即可, 完成之后, 每天 UTC 0 点就会进行填报, (北京时间 8 点).
 
 # 跋
 
