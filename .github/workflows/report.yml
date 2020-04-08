@@ -30,7 +30,6 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        cd ucas-covid19
         sed -i "s/PASSWORD/${{ secrets.SEP_PASSWD }}/g" sub.py
         sed -i "s/USERNAME/${{ secrets.SEP_USER_NAME }}/g" sub.py
         sed -i "s/API_KEY/${{ secrets.API_KEY }}/g" sub.py
