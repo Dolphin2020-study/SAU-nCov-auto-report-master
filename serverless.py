@@ -12,8 +12,8 @@ from datetime import datetime
 
 s = requests.Session()
 
-user = ""    # sep账号
-passwd = ""   # sep密码
+user = "USERNAME"    # sep账号
+passwd = "PASSWORD"   # sep密码
 api_key = ""  # server酱的api，填了可以微信通知打卡结果，不填没影响
 
 
