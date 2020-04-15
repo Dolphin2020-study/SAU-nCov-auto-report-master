@@ -6,6 +6,8 @@ license: CC BY-NC-SA 3.0
 
 import pytz
 import requests
+from time import sleep
+from random import randint
 from datetime import datetime
 
 
@@ -95,6 +97,10 @@ def message(key, title, body):
 
 if __name__ == "__main__":
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
+    for i in range(randint(10,600),0,-1):
+        print("\r等待{}秒后填报".format(i),end='')
+        sleep(1)
+
     login(s, user, passwd)
     yesterday = get_daily(s)
     submit(s, yesterday)
