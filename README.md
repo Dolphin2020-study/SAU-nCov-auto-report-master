@@ -12,7 +12,7 @@
 2. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
 2. 放到服务器上，修改crontab，设定为每天八点半运行
 ```
-30 8 * * * /usr/bin/python3  /root/ncov-ucas/yqfk.py >>/tmp/yqfk.log
+30 8 * * * /usr/bin/python3  /root/ncov-ucas/sub.py >>/tmp/yqfk.log
 ```
 
 
