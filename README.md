@@ -28,6 +28,21 @@ TZ=Asia/Shanghai
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ```
 
+
+# 使用 GitHub Actions（推荐）
+没有服务器的同学可以使用 GitHub Action 来进行运行, 使用步骤:
+- 克隆这个仓库到你名下
+- fork的仓库默认禁用了`workflow`，需要手动打开：点击 `actions`选项卡，点击`I understand my workflows, go ahead rand run them`。
+- 在仓库设置里面, 设置 secrets 如下
+  - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
+  - `SEP_PASSWD`: 你的 SEP 密码
+  - `API_KEY`: 你的通知 api key (强烈建议设置, 因为不设置这个 api key 你无法及时知晓运行状态)
+
+参考截图设定以上三个secrets，`API_KEY`可选。
+![](setting.png)
+
+ 完成之后, 每天 UTC 0 点会触发github actions进行填报, (北京时间 8 点)。
+
 # serverless 
 如果你没有服务器，但是仍然想使用本程序，可以使用 serverless function，这里以腾讯云云函数为例。
 1. 登录注册腾讯云
@@ -39,20 +54,14 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 使用腾讯云的云函数打卡的计算量和调用量极低，不会收费。
 
-# 使用 GitHub Actions
-如果你不喜欢腾讯云, 就可以使用 GitHub Action 来进行运行, 使用步骤:
-- 克隆这个仓库到你名下
-- fork的仓库默认禁用了`workflow`，需要手动打开：点击 `actions`选项卡，点击`I understand my workflows, go ahead rand run them`。
-- 在仓库设置里面, 设置 secrets 如下
-  - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
-  - `SEP_PASSWD`: 你的 SEP 密码
-  - `API_KEY`: 你的通知 api key (强烈建议设置, 因为不设置这个 api key 你无法及时知晓运行状态)
-
-即可, 完成之后, 每天 UTC 0 点就会进行填报, (北京时间 8 点).
-
 # 跋
 
 只接受PR，不接受需求。
+
+# changelog
+- 2020年4月15日 添加了随机等待`10-600`秒之后再进行填报
+- 2020年4月15日 添加了`user-agent`
+- 2020年4月15日 更新了README，添加了设定secrets页面的截图
 
 # 致谢
 - 感谢 [karuboniru](https://github.com/IanSmith123/ucas-covid19/pull/1) 提供的github actions 支持
