@@ -73,6 +73,7 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 - 2020年4月15日 添加了随机等待`10-600`秒之后再进行填报
 - 2020年4月15日 添加了`user-agent`
 - 2020年4月15日 更新了README，添加了设定secrets页面的截图
+- 2020年6月12日 更新了README，提醒同学请勿直接在代码中填写密码
 
 # 致谢
 - 感谢 [karuboniru](https://github.com/IanSmith123/ucas-covid19/pull/1) 提供的github actions 支持
