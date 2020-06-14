@@ -47,8 +47,8 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
   - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
   - `SEP_PASSWD`: 你的 SEP 密码
   - `API_KEY`: 你的通知[server酱](http://sc.ftqq.com/3.version)的api key，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
-- 编辑`.github/workflows/report.yml`并提交以触发action运行。编辑内容随意，
-不影响按时正常签到即可。
+- 测试actions是否可以正常工作：编辑本项目内任意文件，推荐修改`README.md`，比如添加一个空行，并提交以触发action运行，提交后的一分钟左右可以在action选项卡中看到运行记录
+
 
 参考截图设定以上三个secrets，`API_KEY`可选。
 ![](setting.png)
