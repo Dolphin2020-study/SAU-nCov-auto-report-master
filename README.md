@@ -11,10 +11,11 @@
 
 # 方法一： 使用自己的服务器运行
 ## 用法
-1. 下载本项目到本地
-2. 修改本地项目里面`sub.py`代码里面的sep账号和密码
-3. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
-4. 上传`sub.py`到自己的服务器上，修改crontab，设定为每天八点半运行，注意需要修改以下命令的路径为实际路径。
+1. 点击右上角`star` :)
+2. 下载本项目到本地
+3. 修改本地项目里面`sub.py`代码里面的sep账号和密码
+4. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
+5. 上传`sub.py`到自己的服务器上，修改crontab，设定为每天八点半运行，注意需要修改以下命令的路径为实际路径。
 ```
 30 8 * * * /usr/bin/python3  /root/ncov-ucas/sub.py >>/tmp/yqfk.log
 ```
@@ -41,6 +42,7 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 Github提供了一个secret功能，用于存储密钥等敏感信息，请按照以下步骤操作。
 
 使用步骤:
+- 点击右上角 `star`
 - 克隆这个仓库到你名下
 - fork的仓库默认禁用了`workflow`，需要手动打开：点击 `actions`选项卡，点击`I understand my workflows, go ahead and run them`。
 - 在仓库设置里面, 设置 secrets 如下
