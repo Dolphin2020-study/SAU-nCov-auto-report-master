@@ -1,9 +1,11 @@
 # ucas-covid19
 国科大疫情防控每日填报助手，用于解决忘记填写企业微信中身体状况每日打卡的问题。
 
+# 注意
 本人不对因为滥用此程序造成的后果负责，**请在合理且合法的范围内使用本程序**。
 
-**本程序仅用于解决忘记打卡这一问题，如果身体状况发生变化或者地点发生变化，请务必在程序运行之前手动打卡。**
+**本程序仅用于解决忘记打卡这一问题，如果填报表中任意情况发生变化，比如地点发生变化，请务必在程序运行之前手动打卡。**
+
 
 理论上来说本程序适用于**国内大多数高校**的每日打卡，只需要替换代码中的提交网址并完成其他的适配性工作即可，其他学校有需求的同学可以修改本代码，但请遵守`CC BY-NC-SA 3.0` 许可协议。
 
@@ -34,6 +36,7 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ```
 
 
+
 # 方法二： 使用 GitHub Actions（推荐使用）
 没有服务器的同学可以使用 GitHub Action 来进行运行此程序。
 
@@ -42,7 +45,7 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 Github提供了一个secret功能，用于存储密钥等敏感信息，请按照以下步骤操作。
 
 使用步骤:
-- 点击右上角 `star`
+- 点击右上角 `star` :)
 - 克隆这个仓库到你名下
 - fork的仓库默认禁用了`workflow`，需要手动打开：点击 `actions`选项卡，点击`I understand my workflows, go ahead and run them`。
 - 在仓库设置里面, 设置 secrets 如下
@@ -59,17 +62,6 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 完成之后, 每天 UTC 23:50 (北京时间 7:50) 自动触发github actions进行填报 。
 
 
-# 方法三： serverless 
-如果你没有服务器，但是仍然想使用本程序，可以使用 serverless function，这里以腾讯云云函数为例。
-1. 登录注册腾讯云
-2. 打开`https://console.cloud.tencent.com/scf/`控制台的云函数页面，任选地区，点击`新建`
-3. 输入函数名称`covid`，运行环境python3.6，创建方式空白函数
-4. 全选然后删除下面cloud studio中正在编辑的`index.py`的文件的全部内容，然后将本项目中`serverless.py`的内容粘贴进去，同时修改自己的sep信息，如果有server酱api的可以填key没有的可以不写
-5. 点击完成
-6. 点击触发方式，选择添加触发方式，输入定时任务名称daily，触发周期为自定义触发周期， cron表达式 `0 30 8 * * * *`，点击完成
-
-使用腾讯云的云函数打卡的计算量和调用量极低，不会收费。
-
 # 跋
 
 只接受PR，不接受需求。
@@ -80,9 +72,11 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 - 2020年4月15日 更新了README，添加了设定secrets页面的截图
 - 2020年6月12日 更新了README，提醒同学请勿直接在代码中填写密码
 - 2020年6月14日 更新了README，添加有关触发action运行的说明
+- 2020年6月24日 适配了网站的字段的更新；添加了 debug模式隐藏打卡信息；github action直接输出打卡结果；移除了 serverless 方式的支持
 
 # 致谢
 - 感谢 [karuboniru](https://github.com/IanSmith123/ucas-covid19/pull/1) 提供的github actions 支持
+- 感谢 [tyfulcrum](https://github.com/IanSmith123/ucas-covid19/pull/2) 对文档的完善工作
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议</a>进行许可。
 

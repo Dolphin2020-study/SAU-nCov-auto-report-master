@@ -36,4 +36,5 @@ jobs:
         sed -i "s/PASSWORD/${{ secrets.SEP_PASSWD }}/g" sub.py
         sed -i "s/USERNAME/${{ secrets.SEP_USER_NAME }}/g" sub.py
         sed -i "s/API_KEY/${{ secrets.API_KEY }}/g" sub.py
-        python ./sub.py >> /dev/null
+        python ./sub.py   # 去除了debug信息，可以直接输出了
+        #python ./sub.py >> /dev/null
