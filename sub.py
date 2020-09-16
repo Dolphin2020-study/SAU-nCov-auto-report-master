@@ -62,13 +62,13 @@ def submit(s: requests.Session, old: dict):
         # 'ismoved': old['ismoved'],
         'tw': old['tw'],
         'bztcyy': old['bztcyy'],
-        'sftjwh': old['sfsfbh'],
-        'sftjhb': old['sftjhb'],
+        # 'sftjwh': old['sfsfbh'],  # 2020.9.16 del
+        # 'sftjhb': old['sftjhb'],  # 2020.9.16 del
         'sfcxtz': old['sfcxtz'],
         'sfyyjc': old['sfyyjc'],
         'jcjgqr': old['jcjgqr'],
-        'sfjcwhry': old['sfjcwhry'],
-        'sfjchbry': old['sfjchbry'],
+        # 'sfjcwhry': old['sfjcwhry'],  # 2020.9.16 del
+        # 'sfjchbry': old['sfjchbry'],  # 2020.9.16 del
         'sfjcbh': old['sfjcbh'],
         'jcbhlx': old['jcbhlx'],
         'sfcyglq': old['sfcyglq'],
@@ -90,6 +90,9 @@ def submit(s: requests.Session, old: dict):
         'jcjgqk': old['jcjgqk'],
         'jcwhryfs': old['jcwhryfs'],
         'jchbryfs': old['jchbryfs'],
+        'gtshcyjkzt': old['gtshcyjkzt'],  # add @2020.9.16
+        'jrsfdgzgfxdq': old['jrsfdgzgfxdq'],  # add @2020.9.16
+        'jrsflj': old['jrsflj'],  # add @2020.9.16
         'app_id': 'ucas'}
 
     r = s.post("https://app.ucas.ac.cn/ncov/api/default/save", data=new_daily)
