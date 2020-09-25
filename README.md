@@ -61,6 +61,21 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 
 完成之后, 每天 UTC 23:50 (北京时间 7:50) 自动触发github actions进行填报 。
 
+# 方法三：使用Windows的任务计划程序（适合每天需要打开电脑来学习的同学）
+不需要服务器，不需要了解`github actions`, 本地运行，不需担心sep账号密码泄露。
+需要本地电脑安装python3，并且安装库pytz和requests。
+使用步骤：
+- git clone 本仓库
+- 修改`sub.py`中的SEP账号密码
+- 创建一个`autosubWin.bat`文件，写入以下内容
+```
+@echo off
+py -3 \path\to\sub.py #具体路径替换成sub.py的路径
+pause
+```
+- 搜索打开任务计划程序，按照下图在Windows目录下创建任务，事件设为执行autosubWin.bat,触发器设为每天早上固定时间就行
+![](setting2.png)
+- 有一个需要注意的点，在条件那儿要注意看是否勾选了“只有在计算机使用交流电源时才启动此任务”，勾选了记得取消，不然电脑没在充电状态就不会执行这个任务
 
 # 跋
 
@@ -85,4 +100,3 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 Les1ie
 
 2020-4-5 23:56:52
-ex: Test for github workflows.
