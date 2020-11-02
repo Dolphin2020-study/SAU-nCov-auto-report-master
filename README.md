@@ -82,6 +82,40 @@ pause
 
   ![](setting3.png "取消勾选")
 任务计划程序的设置会很直观，你还可以设置如果任务执行失败后多长时间再次尝试执行。需要注意的一点是，设定的时间最好能切合自己常打开电脑的时间。任务执行的时候，会弹出一个DOS窗口，执行完成之后关掉即可。
+
+
+
+
+# 方案四：使用MacOS的crontab定时任务（适合每天需要打开电脑来学习的同学）
+MacOS和Linux服务器操作类似，也是基于crontab。基本操作见`方案一`。与方案一稍微有点区别：①是需要创建一个文件，②是需要手动开启crontab服务，③是无需做时区调整操作。
+1. 下载本项目到本地
+2. 修改本地项目里面`sub.py`代码里面的sep账号和密码
+3. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
+4. 创建'/etc/crontab' 
+   
+   查看com.vix.cron启动项的配置，注意里面有个KeepAlive的条件是 /etc/crontab 是否存在，存在才会执行。检查发现不存在，要手动创建：
+```shell
+$ sudo touch /etc/crontab
+```
+5. 启动crontab服务
+```shell
+$ sudo /usr/sbin/cron start
+
+# 注：MacOS中crontab服务的启动、重启、关闭
+#sudo /usr/sbin/cron start
+#sudo /usr/sbin/cron restart
+#sudo /usr/sbin/cron stop  
+```
+6. 修改crontab，设定为每天8:30、14:10、20:15运行，注意需要修改以下命令的路径为实际路径。(考虑到定时执行时可能正好电脑休眠或者没有网络，单次可能失败，故多次重复确保成功率)
+```shell
+$ crontab -e
+```
+```
+30 8 * * * /usr/bin/python3  /root/ucas-covid19/sub.py >>/tmp/yqfk.log
+10 14 * * * /usr/bin/python3  /root/ucas-covid19/sub.py >>/tmp/yqfk.log
+15 20* * * /usr/bin/python3  /root/ucas-covid19/sub.py >>/tmp/yqfk.log
+```
+
 # 跋
 
 只接受PR，不接受需求。
