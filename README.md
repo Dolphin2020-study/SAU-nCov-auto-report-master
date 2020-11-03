@@ -91,7 +91,7 @@ MacOS和Linux服务器操作类似，也是基于crontab。基本操作见`方�
 1. 下载本项目到本地
 2. 修改本地项目里面`sub.py`代码里面的sep账号和密码
 3. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
-4. 创建'/etc/crontab' 
+4. 创建 `/etc/crontab`
    
    查看com.vix.cron启动项的配置，注意里面有个KeepAlive的条件是 /etc/crontab 是否存在，存在才会执行。检查发现不存在，要手动创建：
 ```shell
@@ -129,12 +129,15 @@ $ crontab -e
 - 2020年6月24日 适配了网站的字段的更新；添加了 debug模式隐藏打卡信息；github action直接输出打卡结果；移除了 serverless 方式的支持
 - 2020年9月16日 适配了网站的字段的更新
 - 2020年9月26日 更新了README，添加了使用windows计划任务的操作步骤
+- 2020年11月3日 更新了README，添加了 MacOS系统中 crontab 的配置方法
+
 
 # 致谢
 - 感谢 [karuboniru](https://github.com/IanSmith123/ucas-covid19/pull/1) 提供的github actions 支持
 - 感谢 [tyfulcrum](https://github.com/IanSmith123/ucas-covid19/pull/2) 对文档的完善工作
 - 感谢 [HsimWong](https://github.com/IanSmith123/ucas-covid19/pull/3) 对文档的完善工作
 - 感谢 [spwpun](https://github.com/IanSmith123/ucas-covid19/pull/6) 添加了使用 windows 计划任务的操作步骤
+- 感谢 [PrimeMHD ](https://github.com/IanSmith123/ucas-covid19/pull/7) 添加了使用 MacOS 的 crontab 的配置步骤
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议</a>进行许可。
 
