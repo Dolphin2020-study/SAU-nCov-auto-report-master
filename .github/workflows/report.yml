@@ -30,11 +30,11 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
+      env:
+        SEP_USER_NAME: ${{secrets.SEP_USER_NAME}} 
+        SEP_PASSWORD: ${{secrets.SEP_PASSWORD}}  
+        API_KEY:  ${{secrets.API_KEY}} 
       run: |
         python -m pip install --upgrade pip
         python -m pip install pytz requests datetime
-        sed -i "s/PASSWORD/${{ secrets.SEP_PASSWD }}/g" sub.py
-        sed -i "s/USERNAME/${{ secrets.SEP_USER_NAME }}/g" sub.py
-        sed -i "s/API_KEY/${{ secrets.API_KEY }}/g" sub.py
-        python ./sub.py   # 去除了debug信息，可以直接输出了
-        #python ./sub.py >> /dev/null
+        python ./sub.py  

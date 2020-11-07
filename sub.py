@@ -3,19 +3,26 @@ author: Les1ie
 mail: me@les1ie.com
 license: CC BY-NC-SA 3.0
 """
-
+import os
 import pytz
 import requests
 from time import sleep
 from random import randint
 from datetime import datetime
 
-user = "USERNAME"  # sep账号
-passwd = "PASSWORD"  # sep密码
-api_key = "API_KEY"  # server酱的api，填了可以微信通知打卡结果，不填没影响
-
 # 开启debug将会输出打卡填报的数据，关闭debug只会输出打卡成功或者失败，如果使用github actions，请务必设置该选项为False
 debug = False
+
+# 全局变量
+user = "USERNAME"
+passwd = "PASSWORD"
+api_key = "API_KEY"
+
+# 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
+if os.environ.get('GITHUB_RUN_ID', None):
+    user = os.environ['SEP_USER_NAME']  # sep账号
+    passwd = os.environ['SEP_PASSWORD']  # sep密码
+    api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
 
 
 def login(s: requests.Session, username, password):
