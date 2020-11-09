@@ -32,7 +32,7 @@ jobs:
     - name: Run a multi-line script
       env:
         SEP_USER_NAME: ${{secrets.SEP_USER_NAME}} 
-        SEP_PASSWORD: ${{secrets.SEP_PASSWORD}}  
+        SEP_PASSWD: ${{secrets.SEP_PASSWD}}  
         API_KEY:  ${{secrets.API_KEY}} 
       run: |
         python -m pip install --upgrade pip
