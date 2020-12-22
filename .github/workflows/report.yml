@@ -34,6 +34,8 @@ jobs:
         SEP_USER_NAME: ${{secrets.SEP_USER_NAME}}
         SEP_PASSWD: ${{secrets.SEP_PASSWD}}
         API_KEY: ${{secrets.API_KEY}}
+        SMTP_PORT: ${{secrets.SMTP_PORT}}
+        SMTP_SERVER: ${{secrets.SMTP_SERVER}}
         SENDER_EMAIL: ${{secrets.SENDER_EMAIL}}
         SENDER_EMAIL_PASSWD: ${{secrets.SENDER_EMAIL_PASSWD}}
         RECEIVER_EMAIL: ${{secrets.RECEIVER_EMAIL}}

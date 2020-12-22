@@ -57,10 +57,14 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 - 在仓库设置里面, 设置 secrets 如下
   - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
   - `SEP_PASSWD`: 你的 SEP 密码
-  - `API_KEY`: 你的通知[server酱](http://sc.ftqq.com/3.version)的api key，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
-  - `SENDER_EMAIL`: 发送通知打卡通知邮件的邮箱（可选）
-  - `SENDER_EMAIL_PASSWD`: 发送通知打卡通知邮件的邮箱密码（可选）
-  - `RECEIVER_EMAIL`: 接收打卡通知邮件的邮箱（可选）
+  - server酱通知设置（需要server酱通知时设置）：
+    - `API_KEY`: 你的通知[server酱](http://sc.ftqq.com/3.version)的api key，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
+  - 邮件通知设置（需要邮件通知时设置）：
+    - `SMTP_PORT`: 邮件服务器端口，不设置即为qq邮件服务器端口：465
+    - `SMTP_SERVER`: 邮件服务器地址，不设置即为qq邮件服务器：smtp.qq.com
+    - `SENDER_EMAIL`: 发送通知打卡通知邮件的邮箱，必须设置
+    - `SENDER_EMAIL_PASSWD`: 发送通知打卡通知邮件的邮箱密码，需要开启邮箱smtp服务，此处可能不为邮箱的登录密码，如：qq邮箱为授权码，需要在设置中生成，必须设置
+    - `RECEIVER_EMAIL`: 接收打卡通知邮件的邮箱，必须设置
 - 测试actions是否可以正常工作：编辑本项目内任意文件，推荐修改`README.md`，比如添加一个空行，并提交以触发action运行，提交后的一分钟左右可以在action选项卡中看到运行记录
 
 
