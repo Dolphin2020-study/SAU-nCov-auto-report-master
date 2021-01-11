@@ -40,7 +40,7 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 ![](setting.png)
 
 
-完成之后, 每天 UTC 23:50 (北京时间 7:50) 自动触发github actions进行填报 。
+完成之后, 每天  (北京时间 0:00) 自动触发github actions进行填报 。
 
 
 
