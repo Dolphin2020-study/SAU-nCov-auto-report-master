@@ -20,22 +20,29 @@ debug = False
 verify_cert = False
 
 # 全局变量
+
 user = "USERNAME"
 passwd = "PASSWORD"
 api_key = "API_KEY"
-
+xingming = "XINGm"
+telnum = "Teln"
+xueyuan = "Xuey"
 smtp_port = "SMTP_PORT"
 smtp_server = "SMTP_SERVER"
 sender_email = "SENDER_EMAIL"
 sender_email_passwd = "SENDER_EMAIL_PASSWD"
 receiver_email = "RECEIVER_EMAIL"
+sauid = "SAUI"
 
 # 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
 if os.environ.get('GITHUB_RUN_ID', None):
     user = os.environ['SEP_USER_NAME']  # sep账号
     passwd = os.environ['SEP_PASSWD']  # sep密码
     api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
-
+    xingming = os.environ['XINGMING'] 
+    telnum = os.environ['TELNUM'] 
+    xueyuan = os.environ['XUEYUAN'] 
+    sauid = os.environ['SAUID'] 
     smtp_port = os.environ['SMTP_PORT'] # 邮件服务器端口，默认为qq smtp服务器端口
     smtp_server = os.environ['SMTP_SERVER'] # 邮件服务器，默认为qq smtp服务器
     sender_email = os.environ['SENDER_EMAIL'] # 发送通知打卡通知邮件的邮箱
@@ -44,16 +51,13 @@ if os.environ.get('GITHUB_RUN_ID', None):
 
 
 def login(s: requests.Session, username, password):
-    # r = s.get(
-    #     "https://app.ucas.ac.cn/uc/wap/login?redirect=https%3A%2F%2Fapp.ucas.ac.cn%2Fsite%2FapplicationSquare%2Findex%3Fsid%3D2")
-    # print(r.text)
     payload = {
         "username": username,
         "password": password
     }
-    r = s.post("https://app.ucas.ac.cn/uc/wap/login/check", data=payload)
+    r = s.post("https://ucapp.sau.edu.cn/wap/login/invalid", data=payload)
 
-    # print(r.text)
+    print(r.text)
     if r.json().get('m') != "操作成功":
         print(r.text)
         print("登录失败")
@@ -62,65 +66,30 @@ def login(s: requests.Session, username, password):
         print("登录成功")
 
 
-def get_daily(s: requests.Session):
-    daily = s.get("https://app.ucas.ac.cn/ncov/api/default/daily?xgh=0&app_id=ucas")
-    # info = s.get("https://app.ucas.ac.cn/ncov/api/default/index?xgh=0&app_id=ucas")
-    j = daily.json()
-    d = j.get('d', None)
-    if d:
-        return daily.json()['d']
-    else:
-        print("获取昨日信息失败")
-        exit(1)
 
-
-def submit(s: requests.Session, old: dict):
+def submit(s: requests.Session):
     new_daily = {
-        'realname': old['realname'],
-        'number': old['number'],
-        'szgj_api_info': old['szgj_api_info'],
-        'szgj': old['szgj'],
-        'old_sfzx': old['sfzx'],
-        'sfzx': old['sfzx'],
-        'szdd': old['szdd'],
-        'ismoved': 0,  # 如果前一天位置变化这个值会为1，第二天仍然获取到昨天的1，而事实上位置是没变化的，所以置0
-        # 'ismoved': old['ismoved'],
-        'tw': old['tw'],
-        'bztcyy': old['bztcyy'],
-        # 'sftjwh': old['sfsfbh'],  # 2020.9.16 del
-        # 'sftjhb': old['sftjhb'],  # 2020.9.16 del
-        'sfcxtz': old['sfcxtz'],
-        'sfyyjc': old['sfyyjc'],
-        'jcjgqr': old['jcjgqr'],
-        # 'sfjcwhry': old['sfjcwhry'],  # 2020.9.16 del
-        # 'sfjchbry': old['sfjchbry'],  # 2020.9.16 del
-        'sfjcbh': old['sfjcbh'],
-        'jcbhlx': old['jcbhlx'],
-        'sfcyglq': old['sfcyglq'],
-        'gllx': old['gllx'],
-        'sfcxzysx': old['sfcxzysx'],
-        'old_szdd': old['szdd'],
-        'geo_api_info': old['old_city'],  # 保持昨天的结果
-        'old_city': old['old_city'],
-        'geo_api_infot': old['geo_api_infot'],
-        'date': datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d"),
-        'fjsj': old['fjsj'],
-        'jcbhrq': old['jcbhrq'],
-        'glksrq': old['glksrq'],
-        'fxyy': old['fxyy'],
-        'jcjg': old['jcjg'],
-        'jcjgt': old['jcjgt'],
-        'qksm': old['qksm'],
-        'remark': old['remark'],
-        'jcjgqk': old['jcjgqk'],
-        'jcwhryfs': old['jcwhryfs'],
-        'jchbryfs': old['jchbryfs'],
-        'gtshcyjkzt': old['gtshcyjkzt'],  # add @2020.9.16
-        'jrsfdgzgfxdq': old['jrsfdgzgfxdq'],  # add @2020.9.16
-        'jrsflj': old['jrsflj'],  # add @2020.9.16
-        'app_id': 'ucas'}
+        'xingming': xingming,
+        'xuehao': user,
+        'shoujihao': telnum,
+        'danweiyuanxi': xueyuan,
+        'dangqiansuozaishengfen': "河北省",
+        'dangqiansuozaichengshi': "秦皇岛市",
+        'shifouyuhubeiwuhanrenyuanmiqie': "否",
+        'shifoujiankangqingkuang': "是", 
+        'shifoujiechuguohubeihuoqitayou': "是",
+        'fanhuididian':"回家",
+        'shifouweigelirenyuan': "否",
+        'shentishifouyoubushizhengzhuan': "否",
+        'shifouyoufare': "否",
+        'qitaxinxi': "",
+        'tiwen': "36.2",
+        'tiwen1': "36.2",
+        'tiwen2': "36.2",
+        'riqi': datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d"),
+        'id': sauid}
 
-    r = s.post("https://app.ucas.ac.cn/ncov/api/default/save", data=new_daily)
+    r = s.post("https://app.sau.edu.cn/form/wap/default/save?formid=10", data=new_daily)
 
     if debug:
         from urllib.parse import parse_qs, unquote
@@ -131,9 +100,9 @@ def submit(s: requests.Session, old: dict):
 
     result = r.json()
     if result.get('m') == "操作成功":
-        print("打卡成功")
+        print("打卡成功", r.json())
     else:
-        print("打卡失败，错误信息: ", r.json().get("m"))
+        print("打卡失败，错误信息: ", r.json())
 
     if api_key != "":
         message(api_key, result.get('m'), new_daily)
@@ -170,7 +139,7 @@ def send_email(sender, passwd, receiver, subject, msg):
         smtp.quit()
         print("邮件发送成功")
     except Exception as ex:
-        print("邮件发送失败")
+        #print("邮件发送失败")
         if debug:
             print(ex)
 
@@ -184,13 +153,13 @@ def report(username, password):
     s.headers.update(header)
 
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
-    for i in range(randint(10, 600), 0, -1):
+    for i in range(randint(1, 5), 0, -1):
         print("\r等待{}秒后填报".format(i), end='')
         sleep(1)
 
     login(s, username, password)
-    yesterday = get_daily(s)
-    submit(s, yesterday)
+    #yesterday = get_daily(s)
+    submit(s)
 
 
 if __name__ == "__main__":
