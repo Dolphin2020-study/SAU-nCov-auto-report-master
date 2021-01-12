@@ -23,22 +23,20 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 - 克隆这个仓库到你名下
 - fork的仓库默认禁用了`workflow`，需要手动打开：点击 `actions`选项卡，点击`I understand my workflows, go ahead and run them`。
 - 在仓库设置里面, 设置 secrets 如下
-  - `SEP_USER_NAME`: 你的 SEP 用户名(邮箱)
-  - `SEP_PASSWD`: 你的 SEP 密码
+   - `SEP_USER_NAME`: 你的学号 如 12345
+  - `SEP_PASSWD`: 你的智慧沈航密码 如 12345
+  - `XINGMING`: 你的 姓名 如 张三
+  - `XUEYUAN`: 你的 学院 如 计算机学院
+  - `TELNUM`: 你的 电话号码 如 123345
+  - `SAUID`: 你的 SAUID 如 123211(需抓包获取)
   - server酱通知设置（需要server酱通知时设置）：
     - `API_KEY`: 你的通知[server酱](http://sc.ftqq.com/3.version)的api key，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
-  - 邮件通知设置（需要邮件通知时设置）：
-    - `SMTP_PORT`: 邮件服务器端口，不设置即为qq邮件服务器端口：465
-    - `SMTP_SERVER`: 邮件服务器地址，不设置即为qq邮件服务器：smtp.qq.com
-    - `SENDER_EMAIL`: 发送通知打卡通知邮件的邮箱，必须设置
-    - `SENDER_EMAIL_PASSWD`: 发送通知打卡通知邮件的邮箱密码，需要开启邮箱smtp服务，此处可能不为邮箱的登录密码，如：qq邮箱为授权码，需要在设置中生成，必须设置
-    - `RECEIVER_EMAIL`: 接收打卡通知邮件的邮箱，必须设置
 - 测试actions是否可以正常工作：编辑本项目内任意文件，推荐修改`README.md`，比如添加一个空行，并提交以触发action运行，提交后的一分钟左右可以在action选项卡中看到运行记录
 
 
-参考截图设定以上三个secrets，`API_KEY`可选。
+参考截图设定以上七个secrets，`API_KEY`可选。
 ![](setting.png)
-
+![](secrets.jpg)
 
 完成之后, 每天  (北京时间 0:00) 自动触发github actions进行填报 。
 
