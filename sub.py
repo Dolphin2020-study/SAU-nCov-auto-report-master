@@ -14,23 +14,23 @@ verify_cert = False
 
 # 全局变量
 
-user = "USERNAME"
-passwd = "PASSWORD"
-api_key = "API_KEY"
-xingming = "XINGm"
-telnum = "Teln"
-xueyuan = "Xuey"
-sauid = "SAUI"
+#user = "USERNAME"
+#passwd = "PASSWORD"
+#api_key = "API_KEY"
+#xingming = "XINGm"
+#telnum = "Teln"
+#xueyuan = "Xuey"
+#sauid = "SAUI"
 
 # 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
-if os.environ.get('GITHUB_RUN_ID', None):
-    user = os.environ['SEP_USER_NAME']  # sep账号
-    passwd = os.environ['SEP_PASSWD']  # sep密码
-    api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
-    xingming = os.environ['XINGMING'] 
-    telnum = os.environ['TELNUM'] 
-    xueyuan = os.environ['XUEYUAN'] 
-    sauid = os.environ['SAUID'] 
+#if os.environ.get('GITHUB_RUN_ID', None):
+user = os.environ['SEP_USER_NAME']  # sep账号
+passwd = os.environ['SEP_PASSWD']  # sep密码
+api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
+xingming = os.environ['XINGMING'] 
+telnum = os.environ['TELNUM'] 
+xueyuan = os.environ['XUEYUAN'] 
+sauid = os.environ['SAUID'] 
 
 
 def login(s: requests.Session, username, password):
