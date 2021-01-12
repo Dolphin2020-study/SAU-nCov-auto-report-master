@@ -2,35 +2,24 @@ import os
 import pytz
 import smtplib
 import requests
+import urllib3
 from time import sleep
 from random import randint
 from datetime import datetime
 
-# 开启debug将会输出打卡填报的数据，关闭debug只会输出打卡成功或者失败，如果使用github actions，请务必设置该选项为False
-debug = False
 
 # 忽略网站的证书错误，这很不安全 :(
 verify_cert = False
 
 # 全局变量
-
-user = "USERNAME"
-passwd = "PASSWORD"
-api_key = "API_KEY"
-xingming = "XINGm"
-telnum = "Teln"
-xueyuan = "Xuey"
-sauid = "SAUI"
-
-# 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
-if os.environ.get('GITHUB_RUN_ID', None):
-    user = os.environ['SEP_USER_NAME']  # sep账号
-    passwd = os.environ['SEP_PASSWD']  # sep密码
-    api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
-    xingming = os.environ['XINGMING'] 
-    telnum = os.environ['TELNUM'] 
-    xueyuan = os.environ['XUEYUAN'] 
-    sauid = os.environ['SAUID'] 
+#读取环境变量中的登录信息
+user = os.environ['SEP_USER_NAME']  # 学号
+passwd = os.environ['SEP_PASSWD']  # SAU密码
+api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
+xingming = os.environ['XINGMING'] 
+telnum = os.environ['TELNUM'] 
+xueyuan = os.environ['XUEYUAN'] 
+sauid = os.environ['SAUID'] 
 
 def login(s: requests.Session, username, password):
     payload = {
@@ -102,9 +91,9 @@ def report(username, password):
         sleep(1)
 
     login(s, username, password)
-    #yesterday = get_daily(s)
     submit(s)
 
 
 if __name__ == "__main__":
+    urllib3.disable_warnings()
     report(username=user, password=passwd)
