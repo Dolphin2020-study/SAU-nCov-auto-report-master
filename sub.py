@@ -25,11 +25,8 @@ def login(s: requests.Session, username, password):
         "password": password
     }
     r = s.post("https://ucapp.sau.edu.cn/wap/login/invalid", data=payload)
-
-    print(r.text)
     if r.json().get('m') != "操作成功":
-        print(r.text)
-        print("登录失败")
+        print("登录失败，错误信息: ", r.text)
     else:
         print("登录成功")
 
@@ -58,7 +55,7 @@ def submit(s: requests.Session):
     r = s.post("https://app.sau.edu.cn/form/wap/default/save?formid=10", data=new_daily)
     result = r.json()
     if result.get('m') == "操作成功":
-        print("打卡成功", r.json())
+        print("打卡成功")
         message(api_key, result.get('m'), new_daily)
         exit(0)
     else:
