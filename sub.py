@@ -1,8 +1,3 @@
-"""
-author: Les1ie
-mail: me@les1ie.com
-license: CC BY-NC-SA 3.0
-"""
 import os
 import pytz
 import smtplib
@@ -10,8 +5,6 @@ import requests
 from time import sleep
 from random import randint
 from datetime import datetime
-from email.utils import formataddr
-from email.mime.text import MIMEText
 
 # 开启debug将会输出打卡填报的数据，关闭debug只会输出打卡成功或者失败，如果使用github actions，请务必设置该选项为False
 debug = False
@@ -27,11 +20,6 @@ api_key = "API_KEY"
 xingming = "XINGm"
 telnum = "Teln"
 xueyuan = "Xuey"
-smtp_port = "SMTP_PORT"
-smtp_server = "SMTP_SERVER"
-sender_email = "SENDER_EMAIL"
-sender_email_passwd = "SENDER_EMAIL_PASSWD"
-receiver_email = "RECEIVER_EMAIL"
 sauid = "SAUI"
 
 # 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
@@ -43,11 +31,6 @@ if os.environ.get('GITHUB_RUN_ID', None):
     telnum = os.environ['TELNUM'] 
     xueyuan = os.environ['XUEYUAN'] 
     sauid = os.environ['SAUID'] 
-    smtp_port = os.environ['SMTP_PORT'] # 邮件服务器端口，默认为qq smtp服务器端口
-    smtp_server = os.environ['SMTP_SERVER'] # 邮件服务器，默认为qq smtp服务器
-    sender_email = os.environ['SENDER_EMAIL'] # 发送通知打卡通知邮件的邮箱
-    sender_email_passwd = os.environ['SENDER_EMAIL_PASSWD'] # 发送通知打卡通知邮件的邮箱密码
-    receiver_email = os.environ['RECEIVER_EMAIL'] # 接收打卡通知邮件的邮箱
 
 
 def login(s: requests.Session, username, password):
@@ -106,9 +89,6 @@ def submit(s: requests.Session):
 
     if api_key != "":
         message(api_key, result.get('m'), new_daily)
-    if sender_email != "" and receiver_email != "":
-        send_email(sender_email, sender_email_passwd, receiver_email, result.get('m'), new_daily)
-
 
 def message(key, title, body):
     """
@@ -117,32 +97,6 @@ def message(key, title, body):
     # 错误的key也可以发送消息，无需处理 :)
     msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
     requests.get(msg_url)
-
-
-def send_email(sender, passwd, receiver, subject, msg):
-    """
-    邮件通知打卡结果
-    """
-    try:
-        body = MIMEText(str(msg),'plain','utf-8')
-        body['From'] = formataddr(["notifier",sender])
-        body['To'] = formataddr(["me",receiver])
-        body['Subject'] = "UCAS疫情填报助手通知-" + subject
-
-        global smtp_port, smtp_server
-        if smtp_server == "" or smtp_port == "":
-            smtp_port = 465
-            smtp_server = "smtp.qq.com"
-        smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
-        smtp.login(sender, passwd)
-        smtp.sendmail(sender, receiver, body.as_string())
-        smtp.quit()
-        print("邮件发送成功")
-    except Exception as ex:
-        #print("邮件发送失败")
-        if debug:
-            print(ex)
-
 
 def report(username, password):
     s = requests.Session()
@@ -153,7 +107,7 @@ def report(username, password):
     s.headers.update(header)
 
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
-    for i in range(randint(1, 5), 0, -1):
+    for i in range(randint(5, 90), 0, -1):
         print("\r等待{}秒后填报".format(i), end='')
         sleep(1)
 
