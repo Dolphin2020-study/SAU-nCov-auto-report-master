@@ -1,12 +1,9 @@
-import os
 import pytz
-import smtplib
 import requests
 import urllib3
 from time import sleep
 from random import randint
 from datetime import datetime
-
 
 # 忽略网站的证书错误，这很不安全 :(
 verify_cert = False
@@ -34,8 +31,6 @@ def login(s: requests.Session, username, password):
         print("登录失败")
     else:
         print("登录成功")
-
-
 
 def submit(s: requests.Session):
     new_daily = {
@@ -92,7 +87,6 @@ def report(username, password):
 
     login(s, username, password)
     submit(s)
-
 
 if __name__ == "__main__":
     urllib3.disable_warnings()
