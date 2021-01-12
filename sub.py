@@ -59,11 +59,11 @@ def submit(s: requests.Session):
     result = r.json()
     if result.get('m') == "操作成功":
         print("打卡成功", r.json())
+        message(api_key, result.get('m'), new_daily)
+        exit(0)
     else:
         print("打卡失败，错误信息: ", r.json())
-
-    if api_key != "":
-        message(api_key, result.get('m'), new_daily)
+        exit(1)
 
 def message(key, title, body):
     """
