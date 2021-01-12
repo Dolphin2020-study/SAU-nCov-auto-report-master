@@ -13,17 +13,6 @@ debug = False
 verify_cert = False
 
 # 全局变量
-
-#user = "USERNAME"
-#passwd = "PASSWORD"
-#api_key = "API_KEY"
-#xingming = "XINGm"
-#telnum = "Teln"
-#xueyuan = "Xuey"
-#sauid = "SAUI"
-
-# 如果检测到程序在 github actions 内运行，那么读取环境变量中的登录信息
-#if os.environ.get('GITHUB_RUN_ID', None):
 user = os.environ['SEP_USER_NAME']  # sep账号
 passwd = os.environ['SEP_PASSWD']  # sep密码
 api_key = os.environ['API_KEY']  # server酱的api，填了可以微信通知打卡结果，不填没影响
@@ -107,7 +96,7 @@ def report(username, password):
     s.headers.update(header)
 
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
-    for i in range(randint(5, 90), 0, -1):
+    for i in range(randint(1, 5), 0, -1):
         print("\r等待{}秒后填报".format(i), end='')
         sleep(1)
 
