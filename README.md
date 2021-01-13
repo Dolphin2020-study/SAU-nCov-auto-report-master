@@ -38,7 +38,7 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 ![](setting.png)
 ![](secrets.jpg)
 
-完成之后, 每天  (北京时间 0:00) 自动触发github actions进行填报 。
+完成之后, 每天  (北京时间 8:00-9：00) 每半小时自动触发github actions进行填报 。
 
 
 
