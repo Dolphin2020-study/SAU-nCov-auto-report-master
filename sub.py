@@ -17,6 +17,7 @@ xingming = os.environ['XINGMING']
 telnum = os.environ['TELNUM'] 
 xueyuan = os.environ['XUEYUAN'] 
 sauid = os.environ['SAUID'] 
+tg_token = os.environ['TG_TOKEN']   # tg酱通知token
 
 def login(s: requests.Session, username, password):
     payload = {
@@ -67,7 +68,9 @@ def message(key, title, body):
     """
     # 错误的key也可以发送消息，无需处理 :)
     msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
+    tg_url = "https://dianbao.vercel.app/send/{}/{}".format(tg_token, body)
     requests.get(msg_url)
+    requests.get(tg_url)
 
 def report(username, password):
     s = requests.Session()
