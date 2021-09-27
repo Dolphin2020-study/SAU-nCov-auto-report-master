@@ -29,7 +29,7 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
   - `XUEYUAN`: 你的 学院 如 计算机学院
   - `TELNUM`: 你的 电话号码 如 123345
   - `SAUID`: 你的 SAUID 如 123211(需抓包获取)
-  - `TG_TOKEN`: 你的telegram(@tg_jiang_bot)[https://t.me/tg_jiang_bot]通知token
+  - `TG_TOKEN`: 你的telegram[@tg_jiang_bot](https://t.me/tg_jiang_bot)通知token
   - server酱通知设置（需要server酱通知时设置）：
     - `API_KEY`: 你的通知[server酱](http://sc.ftqq.com/3.version)的api key，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用
 - 测试actions是否可以正常工作：编辑本项目内任意文件，推荐修改`README.md`，比如添加一个空行，并提交以触发action运行，提交后的一分钟左右可以在action选项卡中看到运行记录
