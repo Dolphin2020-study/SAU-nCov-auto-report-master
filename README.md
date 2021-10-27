@@ -56,3 +56,8 @@ Dolphin
 长时间不更新可能被禁用action，请更新yml文件(加个换行就好)
 
 2021-6-26
+
+github action不够稳定，推荐迁移到腾讯云函数，目前运行稳定。
+sauid抓包地址: https://app.sau.edu.cn/form/wap/default?formid=10
+
+2021-10-27
