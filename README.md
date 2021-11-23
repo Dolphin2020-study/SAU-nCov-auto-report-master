@@ -41,6 +41,21 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 完成之后, 每天  (北京时间 8:00-9：00) 每半小时自动触发github actions进行填报 。
 （存在问题，打卡时间不准不稳定，原因未知，挂vps正常，希望大佬可以解决）
 
+以下粘贴自:https://github.com/IanSmith123/ucas-covid19
+# 方法三：使用Windows的任务计划程序（适合每天需要打开电脑来学习的同学）
+不需要服务器，不需要了解github actions, 本地运行，不需担心账号密码泄露。
+
+需要本地电脑安装python3，并且安装依赖库pytz和requests，可以使用命令pip install -r requirements.txt 来进行一键安装，并设置好环境变量。 使用步骤：
+- git clone 本仓库
+- 修改sub.py中的账号密码
+- 使用autosubWin.bat文件
+
+- 搜索打开任务计划程序，按照下图在Windows目录下创建任务，事件设为执行autosubWin.bat,触发器设为每天早上固定时间就行
+![image](https://user-images.githubusercontent.com/23693269/142963254-b3b82bf6-b072-4187-9b1c-d8ebc0f80262.png)
+- 有一个需要注意的点，在条件那儿要注意看是否勾选了“只有在计算机使用交流电源时才启动此任务”，勾选了记得取消，不然电脑没在充电状态就不会执行这个任务
+![image](https://user-images.githubusercontent.com/23693269/142963274-f0c9eba4-657c-4679-ab38-5fb47f5fafde.png)
+任务计划程序的设置会很直观，你还可以设置如果任务执行失败后多长时间再次尝试执行。需要注意的一点是，设定的时间最好能切合自己常打开电脑的时间。
+
 
 # 致谢
 - 感谢ucas-covid19 https://github.com/IanSmith123/ucas-covid19
