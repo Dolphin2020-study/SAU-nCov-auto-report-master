@@ -80,7 +80,7 @@ def report(username, password):
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
     for i in range(randint(10, 30), 0, -1):
         print("\r等待{}秒后填报".format(i), end='')
-        sleep(1)
+        sleep(6) #访问频率设置
 
     login(s, username, password)
     submit(s)
