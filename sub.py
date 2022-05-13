@@ -6,7 +6,7 @@ from random import randint
 from datetime import datetime
 
 # 忽略网站的证书错误，这很不安全 :(
-verify_cert = False
+verify_cert = True
 
 # 全局变量
 #读取环境变量中的登录信息
@@ -66,20 +66,21 @@ def message(key, title, body):
     微信通知打卡结果
     """
     # 错误的key也可以发送消息，无需处理 :)
-    msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
+    msg_url = "https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(key, title, body)
     requests.get(msg_url)
 
 def report(username, password):
     s = requests.Session()
+    s.verify = verify_cert  # 不验证证书
     header = {
         "User-Agent": "Mozilla/5.0 (Linux; Android 10;  AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/045136 Mobile Safari/537.36 wxwork/3.0.16 MicroMessenger/7.0.1 NetType/WIFI Language/zh"
     }
     s.headers.update(header)
 
     print(datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S %Z"))
-    for i in range(randint(1, 5), 0, -1):
+    for i in range(randint(10, 30), 0, -1):
         print("\r等待{}秒后填报".format(i), end='')
-        sleep(1)
+        sleep(6) #访问频率设置
 
     login(s, username, password)
     submit(s)
